@@ -14,8 +14,8 @@
 
         public RomanNumber(ushort n)
         {
-            if (n <= 0 && number >= 3999)
-                throw new RomanNumberException("Ошибка: значение n <= 0 or n > 3999");
+            if (n <= 0 || number >= 3999)
+                throw new RomanNumberException("Ошибка: значение n = 0 or n > 3999");
             number = n;
         }
 
@@ -29,8 +29,8 @@
 
             int tmp = (n1.number + n2.number);
 
-            if (tmp <= 0)
-                throw new RomanNumberException("Ошибка: значение n <= 0", (ushort)tmp);
+            if (tmp <= 0 || tmp > 3999)
+                throw new RomanNumberException("Ошибка: значение n = 0 or n > 3999", (ushort)tmp);
 
             RomanNumber r = new RomanNumber((ushort)tmp);
             return r;
@@ -47,7 +47,7 @@
             int tmp = (n1.number - n2.number);
 
             if (tmp <= 0 || tmp > 3999)
-                throw new RomanNumberException("Ошибка: значение n = 0 or n < 3999", (ushort)tmp);
+                throw new RomanNumberException("Ошибка: значение n = 0 or n > 3999", (ushort)tmp);
 
             RomanNumber r = new RomanNumber((ushort)tmp);
             return r;
@@ -61,10 +61,10 @@
                 throw new RomanNumberException("Значение не задано");
             }
 
-            int tmp = (n1.number - n2.number);
+            int tmp = (n1.number * n2.number);
 
-            if (tmp <= 0)
-                throw new RomanNumberException("Ошибка: значение n <= 0", (ushort)tmp);
+            if (tmp <= 0 || tmp > 3999)
+                throw new RomanNumberException("Ошибка: значение n = 0 or n > 3999", (ushort)tmp);
 
             RomanNumber r = new RomanNumber((ushort)tmp);
             return r;
@@ -80,8 +80,8 @@
 
             int tmp = (n1.number / n2.number);
 
-            if (tmp <= 0)
-                throw new RomanNumberException("Ошибка: значение меньше нуля", (ushort)tmp);
+            if (tmp <= 0 || tmp > 3999)
+                throw new RomanNumberException("Ошибка: значение n = 0 or n > 3999", (ushort)tmp);
 
             RomanNumber r = new RomanNumber((ushort)tmp);
             return r;
@@ -142,7 +142,7 @@
         {
             if (obj is RomanNumber number) return this.number.CompareTo(number.Number);
             else throw new RomanNumberException("Некорректное значение параметра");
-            
+
         }
 
         public static bool operator >(RomanNumber operand1, RomanNumber operand2)
@@ -150,7 +150,7 @@
             return operand1.CompareTo(operand2) > 0;
         }
 
-     
+
         public static bool operator <(RomanNumber operand1, RomanNumber operand2)
         {
             return operand1.CompareTo(operand2) < 0;
